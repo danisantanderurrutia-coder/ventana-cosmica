@@ -1,0 +1,16 @@
+{
+  "name": "ventana-cosmica",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ventana Cósmica - Plataforma de Inteligencia y Archivos Desclasificados (FastAPI + Next.js)",
+  "scripts": {
+    "dev": "concurrently -n \"BACKEND,FRONTEND\" -c \"cyan.bold,magenta.bold\" \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && PYTHONPATH=. ./venv/bin/python run.py",
+    "dev:frontend": "cd frontend && npm run dev",
+    "install:all": "npm install && (cd frontend && npm install) && (cd backend && python3 -m venv venv && ./venv/bin/pip install -r requirements.txt)",
+    "test": "cd backend && PYTHONPATH=. ./venv/bin/pytest tests/test_api.py"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
