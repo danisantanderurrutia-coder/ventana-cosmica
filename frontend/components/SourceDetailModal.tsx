@@ -19,6 +19,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { DocumentItem } from '../types';
+import { getAssetUrl } from '../utils/paths';
 
 interface SourceDetailModalProps {
   document: DocumentItem | null;
@@ -180,7 +181,7 @@ export const SourceDetailModal: React.FC<SourceDetailModalProps> = ({
               <div className="relative aspect-[16/10] sm:aspect-[21/10] w-full overflow-hidden bg-paper-200 dark:bg-stone-800">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={doc.image_url}
+                  src={getAssetUrl(doc.image_url)}
                   alt={doc.title}
                   className="h-full w-full object-cover"
                 />

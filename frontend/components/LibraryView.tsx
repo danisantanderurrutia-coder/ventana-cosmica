@@ -9,6 +9,7 @@ import {
   ArrowUpRight 
 } from 'lucide-react';
 import { DocumentItem } from '../types';
+import { getAssetUrl } from '../utils/paths';
 
 interface LibraryViewProps {
   documents: DocumentItem[];
@@ -100,7 +101,7 @@ export const LibraryView: React.FC<LibraryViewProps> = ({ documents, onSelectDoc
                     <div className="mb-2.5 relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-paper-200">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={doc.image_url}
+                        src={getAssetUrl(doc.image_url)}
                         alt={doc.title}
                         className="h-full w-full object-cover group-hover:scale-102 transition-transform duration-300"
                         loading="lazy"

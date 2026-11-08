@@ -40,7 +40,8 @@ wheels/
 .coverage
 htmlcov/
 .chroma/
-data/
+/backend/data/
+!frontend/data/
 
 # Environment variables & secrets
 .env

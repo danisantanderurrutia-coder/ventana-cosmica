@@ -15,6 +15,7 @@ import {
   Archive
 } from 'lucide-react';
 import { DocumentItem } from '../types';
+import { getAssetUrl } from '../utils/paths';
 
 interface TimelineCarouselProps {
   documents: DocumentItem[];
@@ -200,7 +201,7 @@ export const TimelineCarousel: React.FC<TimelineCarouselProps> = ({
                   {doc.image_url ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={doc.image_url}
+                      src={getAssetUrl(doc.image_url)}
                       alt={doc.title}
                       className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                       loading="lazy"

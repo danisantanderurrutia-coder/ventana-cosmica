@@ -16,9 +16,9 @@ export interface DocumentItem {
   id: string;
   title: string;
   source_type: string;
-  source_url?: string;
-  author?: string;
-  publication_date?: string;
+  source_url?: string | null;
+  author?: string | null;
+  publication_date?: string | null;
   raw_content: string;
   cleaned_content: string;
   stream_category: StreamCategory;
@@ -28,23 +28,23 @@ export interface DocumentItem {
   entities: ExtractedEntities;
   tags: string[];
   is_hoax: boolean;
-  debunk_reason?: string;
-  debunk_citation?: string;
+  debunk_reason?: string | null;
+  debunk_citation?: string | null;
   created_at: string;
   
   // Top Secret Investigative & Archival Metadata
-  archive_reference?: string;        // e.g. "UK-NA: DEFE 24/1948"
-  repository_name?: string;          // e.g. "The National Archives (UK) Discovery"
-  repository_url?: string;           // Direct link to official repository
-  classification_level?: string;      // "DECLASSIFIED // FOIA RELEASE"
-  evidence_chain?: string[];         // Documentary evidence items
-  case_file_number?: string;         // "CASE-NAV-2004-FLIR1"
-  redacted_snippets?: string[];      // Redacted text fragments
+  archive_reference?: string | null;        // e.g. "UK-NA: DEFE 24/1948"
+  repository_name?: string | null;          // e.g. "The National Archives (UK) Discovery"
+  repository_url?: string | null;           // Direct link to official repository
+  classification_level?: string | null;      // "DECLASSIFIED // FOIA RELEASE"
+  evidence_chain?: string[] | null;         // Documentary evidence items
+  case_file_number?: string | null;         // "CASE-NAV-2004-FLIR1"
+  redacted_snippets?: string[] | null;      // Redacted text fragments
   
   // Archival Photos & Document Plates
-  image_url?: string;                // Real historical archival photo or document facsimile
-  image_caption?: string;            // Journalistic caption describing the photograph
-  photo_credit?: string;             // Official credit e.g. "US Navy / DoD / NARA"
+  image_url?: string | null;                // Real historical archival photo or document facsimile
+  image_caption?: string | null;            // Journalistic caption describing the photograph
+  photo_credit?: string | null;             // Official credit e.g. "US Navy / DoD / NARA"
 }
 
 export interface SearchResultItem {

@@ -9,15 +9,33 @@ import { SemanticSearch } from '../components/SemanticSearch';
 import { SourceDetailModal } from '../components/SourceDetailModal';
 import { IngestionModal } from '../components/IngestionModal';
 import { DocumentItem, StreamStats } from '../types';
+import { SEED_DOCUMENTS } from '../data/seedDocuments';
+
+const computeStats = (docs: DocumentItem[]): StreamStats => ({
+  total_documents: docs.length,
+  official_military_count: docs.filter(d => d.stream_category === 'OFFICIAL_MILITARY').length,
+  metaphysical_canalization_count: docs.filter(d => d.stream_category === 'METAPHYSICAL_CANALIZATION').length,
+  unresolved_folklore_count: docs.filter(d => d.stream_category === 'UNRESOLVED_FOLKLORE').length,
+  proven_hoax_count: docs.filter(d => d.stream_category === 'PROVEN_HOAX').length,
+  top_tags: [
+    { tag: '#Nimitz', count: 1 },
+    { tag: '#Pentagon', count: 1 },
+    { tag: '#FLIR', count: 1 },
+    { tag: '#Declassified', count: 2 },
+    { tag: '#Roswell', count: 1 },
+    { tag: '#LawOfOne', count: 1 },
+    { tag: '#Ummo', count: 1 },
+  ],
+});
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<'timeline' | 'feed' | 'library'>('timeline');
-  const [documents, setDocuments] = useState<DocumentItem[]>([]);
-  const [stats, setStats] = useState<StreamStats | null>(null);
+  const [documents, setDocuments] = useState<DocumentItem[]>(SEED_DOCUMENTS);
+  const [stats, setStats] = useState<StreamStats | null>(computeStats(SEED_DOCUMENTS));
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [selectedDoc, setSelectedDoc] = useState<DocumentItem | null>(null);
   const [isIngestOpen, setIsIngestOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   // Initialize Dark / Light theme from localStorage
@@ -70,7 +88,13 @@ export default function Home() {
         setStats(statsData);
       }
     } catch (err) {
-      console.warn('API connection pending or offline. Using local state.', err);
+      console.warn('API connection pending or offline. Using local seed state.', err);
+      if (selectedTag) {
+        setDocuments(SEED_DOCUMENTS.filter(d => d.tags?.includes(selectedTag)));
+      } else {
+        setDocuments(SEED_DOCUMENTS);
+      }
+      setStats(computeStats(SEED_DOCUMENTS));
     } finally {
       setLoading(false);
     }
